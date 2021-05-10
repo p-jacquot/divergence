@@ -5,14 +5,16 @@
 #include <fstream>
 #include <string>
 
+#include "args.h"
 #include "output.h"
 
 using namespace std;
 
 int main(int argc, char ** argv)
 {
-    unsigned int measures(100);
-    unsigned int num_threads = omp_get_max_threads();
+    Args args(argc, argv);
+    unsigned int measures = args.getMeasures();
+    unsigned int num_threads = args.getNumThreads();
     time_point ** time_lists = setup(measures, num_threads);
 
 #pragma omp parallel

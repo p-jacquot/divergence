@@ -7,8 +7,8 @@ LFLAGS:=
 
 EXECUTABLE ?= divergence
 
-SOURCES = divergence.cpp output.cpp
-OBJ_FILES = divergence.o output.o
+SOURCES = args.cpp divergence.cpp output.cpp
+OBJ_FILES = args.o divergence.o output.o
 
 $(EXECUTABLE) : $(SOURCES)
 	$(CC) -c $(COMP) $(SOURCES) $(CFLAGS)
