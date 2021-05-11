@@ -1,22 +1,17 @@
 #ifndef __ARGS_H
 #define __ARGS_H
 
-#include <string>
+#include <stdbool.h>
 
-class Args
-{
-public:
-    Args(int argc, char ** argv);
-
-    unsigned int getMeasures() const;
-    unsigned int getNumThreads() const;
-
-private:
-
-    bool isParameter(const std::string & arg) const;
-    void setValue(const std::string & param, const std::string & value);
+struct Args{
     unsigned int measures;
     unsigned int num_threads;
-};
+} Args;
+
+struct Args * readArgs(int argc, char ** argv);
+
+struct Args * init_args();
+bool isParameter(char * arg);
+void setValue(struct Args * args, char * param, char * value);
 
 #endif

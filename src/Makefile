@@ -1,13 +1,13 @@
-CC:=g++
+CC:=gcc
 COMP:=-fopenmp 
 CFLAGS:=
-LD:=g++
+LD:=gcc
 LOMP:=-fopenmp
 LFLAGS:= 
 
 EXECUTABLE ?= divergence
 
-SOURCES = args.cpp divergence.cpp output.cpp
+SOURCES = args.c divergence.c output.c
 OBJ_FILES = args.o divergence.o output.o
 
 $(EXECUTABLE) : $(SOURCES)
