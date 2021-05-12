@@ -24,9 +24,9 @@ int main(int argc, char ** argv)
 
 double ** setup(const unsigned int num_threads, const unsigned int n)
 {
-    double ** time_lists = malloc(sizeof(double *) * num_threads);
+    double ** time_lists = (double **) malloc(sizeof(double *) * num_threads);
     for (unsigned int i = 0; i < num_threads; ++i)
-        time_lists[i] = malloc(sizeof(double) * n);
+        time_lists[i] = (double *) malloc(sizeof(double) * n);
 
     return time_lists;
 }
