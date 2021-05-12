@@ -13,7 +13,7 @@ int main(int argc, char ** argv)
     struct Args * args = readArgs(argc, argv);
     unsigned int measures = args->measures;
     unsigned int num_threads = args->num_threads;
-    double ** time_lists = setup(measures, num_threads);
+    double ** time_lists = setup(num_threads, measures);
 
 #pragma omp parallel
     diverge(time_lists, measures);
