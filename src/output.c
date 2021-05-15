@@ -1,16 +1,16 @@
 #include "output.h"
 
-void flush(double ** time_lists, const unsigned int num_threads, const unsigned int n)
+void flush(const Experience_s * exp)
 {
     FILE * output = fopen("timestamps.csv", "w+");
-    writeHeader(output, num_threads);
-    writeContent(output, time_lists, num_threads, n);
+    writeHeader(output, exp);
+    writeContent(output, exp);
     fclose(output);
 }
 
-void writeHeader(FILE * output, const unsigned int num_threads)
+void writeHeader(FILE * output, const Experience_s * exp)
 {
-    for(unsigned int i = 0; i < num_threads; ++i)
+    for(unsigned int i = 0; i < exp->num_threads; ++i)
     {
         fputs("Thread ", output);
         char number [12];
@@ -21,26 +21,18 @@ void writeHeader(FILE * output, const unsigned int num_threads)
     fputs("\n", output);
 }
 
-void writeContent(
-        FILE * output,
-        double ** time_lists,
-        const unsigned int num_threads,
-        const unsigned int n)
+void writeContent(FILE * output, const Experience_s * exp)
 {
-    for(unsigned int line = 0; line < n; ++line)
-       writeLine(output, time_lists, num_threads, line); 
+    for(unsigned int line = 0; line < exp->measures; ++line)
+       writeLine(output, exp, line); 
 }
 
-void writeLine(
-        FILE * output,
-        double ** time_lists,
-        const unsigned int num_threads,
-        const unsigned int line_index)
+void writeLine(FILE * output, const Experience_s * exp, const unsigned int line_index)
 {
-    for(unsigned int thread = 0; thread < num_threads; ++thread)
+    for(unsigned int thread = 0; thread < exp->num_threads; ++thread)
     {
-        const double begin = time_lists[thread][0];
-        const double current = time_lists[thread][line_index];
+        const double begin = exp->time_lists[thread][0];
+        const double current = exp->time_lists[thread][line_index];
         const double time_span = current - begin;
 
         char time [50];

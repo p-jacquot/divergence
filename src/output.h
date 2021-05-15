@@ -4,18 +4,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void flush(double ** time_lists, const unsigned int num_threads, const unsigned int n);
-void writeHeader(FILE * output, const unsigned int num_threads);
-void writeContent(
-        FILE * output, 
-        double ** time_lists, 
-        const unsigned int num_threads,
-        const unsigned int n);
+#include "experience.h"
 
-void writeLine(
-        FILE * output, 
-        double ** time_lists, 
-        const unsigned int num_threads,
-        const unsigned int line_index);
+void flush(const Experience_s * exp);
+void writeHeader(FILE * output, const Experience_s * exp);
+void writeContent(FILE * output,  const Experience_s * exp);
+void writeLine(FILE * output, const Experience_s * exp, const unsigned int line_index);
 
 #endif

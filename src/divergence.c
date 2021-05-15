@@ -4,30 +4,19 @@
 
 #include "args.h"
 #include "clock.h"
+#include "experience.h"
 #include "output.h"
 
 
 int main(int argc, char ** argv)
 {
     struct Args * args = readArgs(argc, argv);
-    unsigned int measures = args->measures;
-    unsigned int num_threads = args->num_threads;
-    double ** time_lists = setup(num_threads, measures);
+    Experience_s * exp = init_exp(args->num_threads, args->measures);
 
 #pragma omp parallel
-    diverge(time_lists, measures);
+    diverge(exp->time_lists, exp->measures);
 
-    flush(time_lists, num_threads, measures);
-}
-
-
-double ** setup(const unsigned int num_threads, const unsigned int n)
-{
-    double ** time_lists = (double **) malloc(sizeof(double *) * num_threads);
-    for (unsigned int i = 0; i < num_threads; ++i)
-        time_lists[i] = (double *) malloc(sizeof(double) * n);
-
-    return time_lists;
+    flush(exp);
 }
 
 void diverge(double ** time_lists, const unsigned int n)
