@@ -10,7 +10,7 @@
 
 int main(int argc, char ** argv)
 {
-    struct Args * args = readArgs(argc, argv);
+    Args_s * args = get_args(argc, argv);
     Experience_s * exp = init_exp(args->num_threads, args->measures);
     omp_set_num_threads(args->num_threads);
 

@@ -8,10 +8,14 @@ struct Args{
     unsigned int num_threads;
 } Args;
 
-struct Args * readArgs(int argc, char ** argv);
+typedef struct Args Args_s;
 
-struct Args * init_args();
-bool isParameter(char * arg);
-void setValue(struct Args * args, char * param, char * value);
+Args_s * get_args(int argc, char ** argv);
+
+Args_s * init_args();
+
+void read_args(Args_s * args, const int argc, char ** argv);
+bool is_parameter(char * arg);
+void set_value(Args_s * args, char * param, char * value);
 
 #endif

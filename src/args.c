@@ -3,32 +3,37 @@
 #include <stdlib.h>
 #include <omp.h>
 
-struct Args * readArgs(int argc, char ** argv)
+Args_s * get_args(int argc, char ** argv)
 {
-    struct Args * args = init_args();
-    for(unsigned int i = 0; i < argc; ++i)
-    {
-        char * param = argv[i];
-        if(isParameter(param))
-            setValue(args, param, argv[++i]);
-    }
+    Args_s * args = init_args();
+    read_args(args, argc, argv);
     return args;
 }
 
-struct Args * init_args()
+Args_s * init_args()
 {
-    struct Args * args = malloc(sizeof(struct Args));
+    Args_s * args = malloc(sizeof(Args_s));
     args->measures = 100;
     args->num_threads = omp_get_max_threads();
     return args;
 }
 
-bool isParameter(char * arg)
+void read_args(Args_s * args, const int argc, char ** argv)
+{
+    for(unsigned int i = 0; i < argc; ++i)
+    {
+        char * param = argv[i];
+        if(is_parameter(param))
+            set_value(args, param, argv[++i]);
+    }
+}
+
+bool is_parameter(char * arg)
 {
     return (arg[0] == '-');
 }
 
-void setValue(struct Args * args, char * param, char * value)
+void set_value(Args_s * args, char * param, char * value)
 {
     switch(param[1])
     {
