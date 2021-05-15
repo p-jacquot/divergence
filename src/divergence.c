@@ -12,6 +12,7 @@ int main(int argc, char ** argv)
 {
     struct Args * args = readArgs(argc, argv);
     Experience_s * exp = init_exp(args->num_threads, args->measures);
+    omp_set_num_threads(args->num_threads);
 
 #pragma omp parallel
     diverge(exp->time_lists, exp->measures);
