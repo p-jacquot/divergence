@@ -1,10 +1,9 @@
 #include "divergence.h"
 
 #include <omp.h>
-#include <sys/time.h>
-#include <time.h>
 
 #include "args.h"
+#include "clock.h"
 #include "output.h"
 
 
@@ -43,13 +42,6 @@ void diverge(double ** time_lists, const unsigned int n)
         timestamps[i] = get_time();
         do_something();
     }
-}
-
-double get_time()
-{
-    struct timespec t;
-    clock_gettime(CLOCK_MONOTONIC, &t);
-    return (double)(t.tv_sec + t.tv_nsec / 1000000000.0);   
 }
 
 void do_something()

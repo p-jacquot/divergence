@@ -7,8 +7,8 @@ LFLAGS:=
 
 EXECUTABLE := divergence
 
-SOURCES = args.c divergence.c output.c
-OBJ_FILES = args.o divergence.o output.o
+SOURCES = args.c clock.c divergence.c output.c
+OBJ_FILES = args.o clock.o divergence.o output.o
 
 $(EXECUTABLE) : $(SOURCES)
 	$(CC) -c $(COMP) $(SOURCES) $(CFLAGS)

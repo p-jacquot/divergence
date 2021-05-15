@@ -7,7 +7,6 @@ int main(int argc, char ** argv);
 double ** setup(const unsigned int num_threads, const unsigned int n);
 
 void diverge(double ** time_lists, const unsigned int n);
-double get_time();
 void do_something();
 
 #endif
