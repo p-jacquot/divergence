@@ -23,7 +23,7 @@ void read_args(Args_s * args, const int argc, char ** argv)
     for(unsigned int i = 0; i < argc; ++i)
     {
         char * param = argv[i];
-        if(is_parameter(param))
+        if(is_parameter(param) && i != argc - 1)
             set_value(args, param, argv[++i]);
     }
 }
