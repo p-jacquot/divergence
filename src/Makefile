@@ -5,7 +5,7 @@ LD:=gcc
 LOMP:=-fopenmp
 LFLAGS:= 
 
-EXECUTABLE ?= divergence
+EXECUTABLE := divergence
 
 SOURCES = args.c divergence.c output.c
 OBJ_FILES = args.o divergence.o output.o
