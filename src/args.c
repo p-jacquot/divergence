@@ -14,6 +14,7 @@ Args_s * init_args()
 {
     Args_s * args = malloc(sizeof(Args_s));
     args->measures = 100;
+    args->ncos = 100;
     args->num_threads = omp_get_max_threads();
     return args;
 }
@@ -39,6 +40,10 @@ void set_value(Args_s * args, char * param, char * value)
     {
         case 'n':
             args->measures = strtoul(value, NULL, 10);
+            break;
+
+        case 'c':
+            args->ncos = strtoul(value, NULL, 10);
             break;
             
         case 't':

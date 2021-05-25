@@ -11,31 +11,54 @@
 int main(int argc, char ** argv)
 {
     Args_s * args = get_args(argc, argv);
-    Experience_s * exp = init_exp(args->num_threads, args->measures);
-    omp_set_num_threads(args->num_threads);
+    Experience_s * exp = init_exp(args);
+    omp_set_num_threads(exp->num_threads);
 
 #pragma omp parallel
-    diverge(exp->time_lists, exp->measures);
+    diverge(exp);
 
     flush(exp);
 }
 
-void diverge(double ** time_lists, const unsigned int n)
+void diverge(Experience_s * exp)
 {
     unsigned int thread_num = omp_get_thread_num();
-    double * timestamps = time_lists[thread_num];
+    double * timestamps = exp->time_lists[thread_num];
 
 #pragma omp barrier
     
-    for(unsigned int i = 0; i < n; ++i)
+    for(unsigned int i = 0; i < exp->measures; ++i)
     {
         timestamps[i] = get_time();
-        do_something();
+        naive_cos(0.00001, exp->ncos);
     }
 }
 
-void do_something()
+double naive_cos(double x, const unsigned int n)
 {
-    for(unsigned int i = 0; i < 1000; ++i);
+    double cos = 1.0;
+    for(unsigned int i = 0; i <= n; ++i)
+    {
+        cos += naive_pow(x, 2*i) / naive_factorial(2*i);
+    }
+
+    return cos;
+}
+
+double naive_pow(double x, const unsigned int pow)
+{
+    unsigned int result = 1;
+    for(unsigned int i = 1; i <= pow; ++i)
+        result *= x;
+    return result;
+}
+
+unsigned int naive_factorial(const unsigned int x)
+{
+    unsigned int fact = 1;
+    for(unsigned int i = 1; i <= x; ++i)
+        fact *= i;
+
+    return fact;
 }
 

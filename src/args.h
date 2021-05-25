@@ -5,6 +5,7 @@
 
 struct Args{
     unsigned int measures;
+    unsigned int ncos;
     unsigned int num_threads;
 } Args;
 

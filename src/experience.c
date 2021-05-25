@@ -2,12 +2,13 @@
 
 #include <stdlib.h>
 
-Experience_s * init_exp(const unsigned int num_threads, const unsigned int measures)
+Experience_s * init_exp(const Args_s * args)
 {
     Experience_s * exp = (struct Experience *) malloc(sizeof(struct Experience));
-    exp->num_threads = num_threads;
-    exp->measures = measures;
-    exp->time_lists = alloc_time_lists(num_threads, measures);
+    exp->num_threads = args->num_threads;
+    exp->measures = args->measures;
+    exp->ncos = args->ncos;
+    exp->time_lists = alloc_time_lists(exp->num_threads, exp->measures);
     return exp;
 }
 
