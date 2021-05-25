@@ -25,4 +25,4 @@ hermitcore :
 
 clean :
 	cd src && make clean
-	rm -rf divergence
+	rm -rf divergence timestamps.csv

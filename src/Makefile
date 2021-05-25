@@ -15,4 +15,4 @@ $(EXECUTABLE) : $(SOURCES)
 	$(LD) -o $(EXECUTABLE) $(LOMP) $(OBJ_FILES) $(LFLAGS)
 
 clean :
-	rm -rf $(OBJ_FILES) $(EXECUTABLE)
+	rm -rf $(OBJ_FILES) $(EXECUTABLE) timestamps.csv
