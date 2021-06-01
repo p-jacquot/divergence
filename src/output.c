@@ -31,12 +31,12 @@ void writeLine(FILE * output, const Experience_s * exp, const unsigned int line_
 {
     for(unsigned int thread = 0; thread < exp->num_threads; ++thread)
     {
-        const double begin = exp->time_lists[thread][0];
-        const double current = exp->time_lists[thread][line_index];
-        const double time_span = current - begin;
+        const unsigned int begin = exp->time_lists[thread][0];
+        const unsigned int current = exp->time_lists[thread][line_index];
+        const unsigned int time_span = current - begin;
 
         char time [50];
-        snprintf(time, 50, "%f", time_span);
+        snprintf(time, 50, "%u", time_span);
         fputs(time, output);
         fputs(";", output);
     }

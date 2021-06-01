@@ -12,11 +12,11 @@ Experience_s * init_exp(const Args_s * args)
     return exp;
 }
 
-double ** alloc_time_lists(const unsigned int num_threads, const unsigned int n)
+uint64_t ** alloc_time_lists(const unsigned int num_threads, const unsigned int n)
 {
-    double ** time_lists = (double **) malloc(sizeof(double *) * num_threads);
-    for (unsigned int i = 0; i < num_threads; ++i)
-        time_lists[i] = (double *) malloc(sizeof(double) * n);
+    uint64_t ** time_lists = (uint64_t **) malloc(sizeof(uint64_t *) * num_threads);
+    for (uint64_t i = 0; i < num_threads; ++i)
+        time_lists[i] = (uint64_t *) malloc(sizeof(uint64_t) * n);
 
     return time_lists;
 }

@@ -24,14 +24,14 @@ int main(int argc, char ** argv)
 void diverge(Experience_s * exp)
 {
     unsigned int thread_num = omp_get_thread_num();
-    size_t length = sizeof(double) * exp->measures;
-    double * timestamps = (double *) malloc(length);
+    size_t length = sizeof(unsigned int) * exp->measures;
+    unsigned int * timestamps = (unsigned int *) malloc(length);
 
 #pragma omp barrier
     
     for(unsigned int i = 0; i < exp->measures; ++i)
     {
-        timestamps[i] = get_time();
+        timestamps[i] = get_rdtsc();
         naive_cos(0.00001, exp->ncos);
     }
     memcpy(exp->time_lists[thread_num], timestamps, length);
