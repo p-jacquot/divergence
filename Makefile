@@ -10,7 +10,7 @@ divergence :
 hermitux :
 	cd src && make \
 		CC=$(CC) \
-		CFLAGS="-D GETTIMEOFDAY"
+		CFLAGS="-D GETTIMEOFDAY" \
 		LD=$(HERMITUX_DIR)/musl/obj/musl-gcc \
 		LFLAGS=-static \
 		LOMP="-fopenmp -L$(HERMITUX_DIR)/libiomp/build/runtime/src"
