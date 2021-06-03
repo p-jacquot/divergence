@@ -2,6 +2,7 @@
 
 Divergence is a small program for measuring OS noise.
 It does so by spawning several threads, and asking them to save timestamps after performing some operations.
+The operations performed are done for a naive computation of the cosinus.
 
 ## Build
 
@@ -30,10 +31,11 @@ Executing divergence create a `timestamps.csv` files, where the timestamps taken
 Here is the command syntax :
 
 ```
-./divergence [-n NUMBER] [-t NUMBER]
+./divergence [-n NUMBER] [-t NUMBER] [-c NUMBER]
 ```
 
 ### parameters
 
 * n : Number of timestamps to take. (default : 100)
 * t : Number of threads to spawn. (default : `omp_get_max_threads()` return value)
+* c : Number of terms to sum for computing the cosinus.
