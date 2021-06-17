@@ -12,23 +12,33 @@
 int main(int argc, char ** argv)
 {
     Args_s * args = get_args(argc, argv);
+
+#ifdef OMP
     Experience_s * exp = init_exp(args);
     omp_set_num_threads(exp->num_threads);
 
 #pragma omp parallel
     diverge(exp);
+#else
+    Experience_s * exp = init_exp(args);
+    diverge(exp);
+#endif
 
     flush(exp);
 }
 
 void diverge(Experience_s * exp)
 {
+#ifdef OMP
     unsigned int thread_num = omp_get_thread_num();
+#else
+    unsigned int thread_num = 0;
+#endif
     size_t length = sizeof(uint64_t) * exp->measures;
     uint64_t * timestamps = (uint64_t *) malloc(length);
-
+#ifdef OMP
 #pragma omp barrier
-    
+#endif
     for(unsigned int i = 0; i < exp->measures; ++i)
     {
         uint64_t begin = get_rdtsc();

@@ -15,7 +15,11 @@ Args_s * init_args()
     Args_s * args = malloc(sizeof(Args_s));
     args->measures = 100;
     args->ncos = 100;
+#ifdef OMP
     args->num_threads = omp_get_max_threads();
+#else
+    args->num_threads = 1;
+#endif
     return args;
 }
 
