@@ -42,12 +42,24 @@ void diverge(Experience_s * exp)
     for(unsigned int i = 0; i < exp->measures; ++i)
     {
         uint64_t begin = get_rdtsc();
+#ifdef COMPUTE_COS
         naive_cos(0.00001, exp->ncos);
+#else
+        simple_for(exp->ncos);
+#endif
         uint64_t end = get_rdtsc();
         timestamps[i] = end - begin;
     }
     memcpy(exp->time_lists[thread_num], timestamps, length);
     free(timestamps);
+}
+
+unsigned int simple_for(const unsigned int n)
+{
+    unsigned int sum = 0;
+    for(unsigned int i = 0; i < n; ++i)
+        sum += i;
+    return sum;
 }
 
 double naive_cos(double x, const unsigned int n)
